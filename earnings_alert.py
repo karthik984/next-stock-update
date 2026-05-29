@@ -7,9 +7,41 @@ TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 
 # Edit this list with your stocks
-WATCHLIST = ["AAPL", "TSLA", "NVDA", "MSFT", "AMZN"]
+WATCHLIST = [
+    # Wave 1 — GPU / Compute (already played but still matters)
+    "NVDA",
+    
+    # Wave 2 — HBM Memory (RIGHT NOW)
+    "MU",       # Micron — you already own
+    "AMKR",     # Amkor — advanced packaging
+    
+    # Wave 3 — Networking / Optical Interconnects (building)
+    "MRVL",     # Marvell
+    "AVGO",     # Broadcom
+    "COHR",     # Coherent — optical
+    
+    # Wave 4 — Power & Energy Infrastructure (multi-year)
+    "VST",      # Vistra — power gen
+    "CEG",      # Constellation Energy — nuclear
+    "ETN",      # Eaton — transformers
+    "PWR",      # Quanta Services — grid buildout
+    
+    # Wave 5 — Liquid Cooling (emerging)
+    "VRT",      # Vertiv
+    
+    # Wave 6 — Cloud Data Platforms (Snowflake moment)
+    "SNOW",     # Snowflake — you just missed this one
+    "PLTR",     # Palantir — enterprise AI
+    
+    # ARM / Custom Silicon
+    "ARM",      # ARM Holdings — royalties on everything
+    "TSM",      # TSMC — manufactures it all
+    
+    # Already in your portfolio
+    "SMCI",     # SuperMicro — servers
+]
 
-ALERT_DAYS_AHEAD = 7
+ALERT_DAYS_AHEAD = 14
 
 
 def send_telegram(message: str):
