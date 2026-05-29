@@ -27,22 +27,20 @@ def check_earnings():
             t = yf.Ticker(symbol)
             cal = t.calendar
 
-            if cal is None or cal.empty:
+            if not cal or "Earnings Date" not in cal:
                 continue
 
-            # Earnings date
-            if "Earnings Date" in cal.index:
-                raw = cal.loc["Earnings Date"]
-                dates = raw if hasattr(raw, "__iter__") and not isinstance(raw, str) else [raw]
-                for d in dates:
-                    if d is None:
-                        continue
-                    earnings_date = d.date() if hasattr(d, "date") else d
-                    if today <= earnings_date <= cutoff:
-                        days_away = (earnings_date - today).days
-                        alerts.append(
-                            f"📊 *{symbol}* earnings in *{days_away} day(s)* — {earnings_date.strftime('%b %d, %Y')}"
-                        )
+            raw = cal["Earnings Date"]
+            dates = raw if isinstance(raw, list) else [raw]
+            for d in dates:
+                if d is None:
+                    continue
+                earnings_date = d.date() if hasattr(d, "date") else d
+                if today <= earnings_date <= cutoff:
+                    days_away = (earnings_date - today).days
+                    alerts.append(
+                        f"📊 *{symbol}* earnings in *{days_away} day(s)* — {earnings_date.strftime('%b %d, %Y')}"
+                    )
         except Exception as e:
             print(f"Error fetching {symbol}: {e}")
 
