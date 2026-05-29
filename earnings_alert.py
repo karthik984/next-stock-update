@@ -6,40 +6,11 @@ from datetime import datetime, timedelta
 TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 
-# Edit this list with your stocks
-WATCHLIST = [
-    # Wave 1 — GPU / Compute (already played but still matters)
-    "NVDA",
-    
-    # Wave 2 — HBM Memory (RIGHT NOW)
-    "MU",       # Micron — you already own
-    "AMKR",     # Amkor — advanced packaging
-    
-    # Wave 3 — Networking / Optical Interconnects (building)
-    "MRVL",     # Marvell
-    "AVGO",     # Broadcom
-    "COHR",     # Coherent — optical
-    
-    # Wave 4 — Power & Energy Infrastructure (multi-year)
-    "VST",      # Vistra — power gen
-    "CEG",      # Constellation Energy — nuclear
-    "ETN",      # Eaton — transformers
-    "PWR",      # Quanta Services — grid buildout
-    
-    # Wave 5 — Liquid Cooling (emerging)
-    "VRT",      # Vertiv
-    
-    # Wave 6 — Cloud Data Platforms (Snowflake moment)
-    "SNOW",     # Snowflake — you just missed this one
-    "PLTR",     # Palantir — enterprise AI
-    
-    # ARM / Custom Silicon
-    "ARM",      # ARM Holdings — royalties on everything
-    "TSM",      # TSMC — manufactures it all
-    
-    # Already in your portfolio
-    "SMCI",     # SuperMicro — servers
-]
+def load_watchlist(path: str = "watchlist.txt") -> list:
+    with open(path) as f:
+        return [line.strip() for line in f if line.strip()]
+
+WATCHLIST = load_watchlist()
 
 ALERT_DAYS_AHEAD = 14
 
