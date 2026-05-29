@@ -1,0 +1,26 @@
+name: Earnings Alert
+
+on:
+  schedule:
+    - cron: '30 13 * * 1-5'  # 1:30 PM UTC = ~9:30 AM ET, weekdays only
+  workflow_dispatch:          # allows manual trigger from GitHub UI
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run earnings alert
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python earnings_alert.py
