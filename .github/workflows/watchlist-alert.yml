@@ -1,5 +1,5 @@
-name: Earnings Alert
-# v2
+name: Watchlist Alert
+# v3
 
 on:
   schedule:
@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run earnings alert
+      - name: Run watchlist alert
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python earnings_alert.py
+        run: python watchlist_alert.py
